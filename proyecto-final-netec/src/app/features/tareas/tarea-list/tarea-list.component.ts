@@ -3,9 +3,16 @@ import { TareaService } from '../../../core/services/tarea.service';
 import { Tarea } from '../../../core/models/tarea';
 import { Router } from '@angular/router'; 
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
+interface Estado {
+  name: string;
+  code: string;
+} 
+interface Categoria {
+  nameCat: string;
+  codeCat: string;
+} 
 
 @Component({
   selector: 'app-tarea-list',
@@ -21,7 +28,27 @@ export class TareaListComponent implements OnInit{
   constructor(private tareaService: TareaService, private router: Router, 
               private confirmationService: ConfirmationService, private messageService: MessageService) {}
 
+  listEstado: Estado[] | undefined;
+  selectedEstado: Estado | undefined;
+  listCategoria: Categoria[] | undefined;
+  selectedCategoria: Categoria | undefined;                 
+
   ngOnInit() {
+
+
+    this.listEstado = [
+      { name: 'New York', code: 'NY' },
+      { name: 'Rome', code: 'RM' },
+      { name: 'London', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' }
+  ];
+  this.listCategoria = [
+    { nameCat: 'Personal', codeCat: 'NY' },
+    { nameCat: 'Educativa', codeCat: 'RM' },
+    { nameCat: 'Laboral', codeCat: 'LDN' }
+];
+
 
     this.tareaService.getTareas().subscribe({
       next: (data) => {
@@ -36,18 +63,22 @@ export class TareaListComponent implements OnInit{
   }
 
   openEdit(){
+    
+     
 
   }
   eliminar(event: Event){
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
+      message: '¿Estas seguro de Eliminar la Tarea?',
+      header: 'Eliminar Tarea',
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass:"p-button-danger p-button-text",
-      rejectButtonStyleClass:"p-button-text p-button-text",
+      rejectButtonStyleClass:"p-button-text p-button-text ",
       acceptIcon:"none",
       rejectIcon:"none",
+      acceptLabel:"Si",
+      rejectLabel:"No",
 
       accept: () => {
           this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
@@ -59,5 +90,8 @@ export class TareaListComponent implements OnInit{
   }
   limpiarLista(){}
   btnBuscar(){}
-
+  btnAgregar(){
+    
+  }
+  
 }

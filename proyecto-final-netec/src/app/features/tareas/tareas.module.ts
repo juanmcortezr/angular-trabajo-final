@@ -10,7 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
-
+import { CalendarModule } from 'primeng/calendar';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { ToastModule } from 'primeng/toast';
     ButtonModule,
     PanelModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    CalendarModule,
+    DropdownModule
   ],
   exports:[TareaHomeComponent, TareaInsertComponent, TareaUpdateComponent, TareaDeleteComponent, TareaListComponent]
 })

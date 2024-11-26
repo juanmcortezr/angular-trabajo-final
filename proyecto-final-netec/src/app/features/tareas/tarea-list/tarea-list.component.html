@@ -1,18 +1,40 @@
 <p-toast />
 <p-confirmDialog />
-<p-panel header="Gestion de Tareas">
-
+<p-panel header="GESTI&Oacute;N DE TAREAS" class="layout-container menu-layout-overlay">
   <div>
-    <fieldset legend="Header">
+    <fieldset class="bnf-fieldset">
         <legend>Criterios de B&uacute;squeda</legend>
-        <div class="p-field p-grid p-fluid" >  
-            <label for="descripcionInput" class="p-col-12 p-md-2">Categoria:</label>
-            <div class="p-col-12 p-md-8">
-                <input id="descripCategoria" type="text" placeholder=""  (change)="limpiarLista();" style="text-transform: uppercase"/>
+        <div class="formgrid grid" >      
+            <div class="field col-12 md:col-6">
+                <label for="fechaIni" class="col-fixed" style="width:100px">Fecha Inicio: </label>
+                <p-calendar formControlName="fechaIni"  [showIcon]="true" [showOnFocus]="false" inputId="fechaIni" />
+                <!--<p-calendar [(ngModel)]="date"  dateFormat="dd/mm/yy" />-->
             </div>
-            <div class="p-fluid p-col-18 p-md-2">
-                <button pButton pRipple type="button" label="Buscar" (onClick)="btnBuscar()" icon="pi pi-search" ></button>
+            <br>
+            <div class="field col-12 md:col-6">
+                <label for="fechaFin" class="col-fixed" style="width:100px">Fecha Fin: </label>
+                <p-calendar formControlName="fechaFin" [showIcon]="true" [showOnFocus]="false" inputId="fechaFin" />
             </div>
+            <br>
+            <div class="field col-12 md:col-6">
+                <label for="estadoInput" class="p-col-12 p-md-2">Estado:</label>
+                <p-dropdown formControlName="selectedEstado" [options]="listEstado" optionLabel="estadoInput" placeholder="Seleccione" />
+            </div>
+            <br>
+            <div class="field col-12 md:col-6">
+                <label for="categoriaInput" class="p-col-12 p-md-2">Categoria:</label>
+                <p-dropdown formControlName="selectedCategoria" [options]="listCategoria" optionLabel="categoriaInput" placeholder="Seleccione" />
+            </div>
+            <br>
+            <div class="field col-12 md:col-3">
+                <!--<p-button label="Buscar" icon="pi pi-search" (onClick)="btnBuscar()"></p-button>   -->
+                <p-button type="button" label="Buscar" (click)="btnBuscar()" icon="pi pi-search" iconPos="left"></p-button>
+            </div> 
+            <br>  
+            <div class="field col-12 md:col-3">
+                <!--<p-button label="Buscar" icon="pi pi-search" (onClick)="btnBuscar()"></p-button>   -->
+                <p-button type="button" label="Agregar" (click)="btnAgregar()" icon="pi pi-plus" iconPos="left"></p-button>
+            </div>     
         </div>
     </fieldset>
   </div>  
@@ -22,6 +44,8 @@
             <tr>
                 <th>IdTarea </th>
                 <th>desTarea</th>
+                <th>encargado</th>
+                <th>categoria</th>
                 <th>fechaIni</th>
                 <th>fechaFin</th>
                 <th>estado</th>
@@ -36,6 +60,12 @@
                 </td>
                 <td>
                     {{tarea.desTarea }}
+                </td>
+                <td>
+                    {{tarea.encargado}}
+                </td>
+                <td>
+                    {{tarea.categoria }}
                 </td>
                 <td>
                     {{tarea.fechaIni}}
