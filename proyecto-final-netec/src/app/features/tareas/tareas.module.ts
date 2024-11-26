@@ -5,7 +5,11 @@ import { TareaInsertComponent } from './tarea-insert/tarea-insert.component';
 import { TareaUpdateComponent } from './tarea-update/tarea-update.component';
 import { TareaDeleteComponent } from './tarea-delete/tarea-delete.component';
 import { TareaListComponent } from './tarea-list/tarea-list.component';
-
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -17,7 +21,13 @@ import { TareaListComponent } from './tarea-list/tarea-list.component';
     TareaListComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    TableModule,
+    ButtonModule,
+    PanelModule,
+    ConfirmDialogModule,
+    ToastModule
+  ],
+  exports:[TareaHomeComponent, TareaInsertComponent, TareaUpdateComponent, TareaDeleteComponent, TareaListComponent]
 })
 export class TareasModule { }

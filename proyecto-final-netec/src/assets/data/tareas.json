@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "idTarea": "1",
+      "desTarea": "Registro",
+      "fechaIni": "03/03/2024",
+      "fechaFin": "03/06/2024",
+      "estado": "Registrado"
+    },
+    {
+      "idTarea": "2",
+      "desTarea": "Ejecutado",
+      "fechaIni": "03/06/2024",
+      "fechaFin": "03/09/2024",
+      "estado": "Ejecutado"
+    }
+  ]
+}
