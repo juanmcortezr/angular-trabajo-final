@@ -5,8 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireModule} from '@angular/fire/compat';
+//import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+//import { AngularFireModule} from '@angular/fire/compat';
 import { provideHttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,8 +31,8 @@ import { ConfirmationService } from 'primeng/api';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    //AngularFireModule.initializeApp(environment.firebase),
+    //AngularFireAuthModule,
     TareasModule,
     BrowserAnimationsModule,
     ConfirmDialogModule

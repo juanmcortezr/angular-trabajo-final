@@ -10,16 +10,16 @@
         </div>
         <div class="field col-6">
             <label for="fechaFin" > Fecha Fin: </label>
-            <p-calendar formControlName="fechaFin" [showIcon]="true" [showOnFocus]="false" inputId="fechaFin" />
+            <p-calendar formControlName="fechaFin" [showIcon]="true" [showOnFocus]="false" inputId="fechaFin" valu/>
         </div>
         <div class="field col-6">
             <label for="estadoInput">Estado:</label>
-            <p-dropdown formControlName="selectedEstado" [options]="listEstado" optionLabel="estadoInput"
+            <p-dropdown formControlName="selectedEstado" [options]="listEstado" optionLabel="name"
                 placeholder="Seleccione" />
         </div>
         <div class="field col-6">
             <label for="categoriaInput">Categoria:</label>
-            <p-dropdown formControlName="selectedCategoria" [options]="listCategoria" optionLabel="categoriaInput"
+            <p-dropdown formControlName="selectedCategoria" [options]="listCategoria" optionLabel="nameCat"
                 placeholder="Seleccione" />
         </div>
     </div>

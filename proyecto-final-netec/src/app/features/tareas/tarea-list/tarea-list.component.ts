@@ -21,6 +21,7 @@ interface Categoria {
   providers: [ConfirmationService, MessageService]
 })
 export class TareaListComponent implements OnInit{
+  
   listTareas: Tarea[] =[];
   errorMessage: string | null = null;
  
@@ -35,19 +36,18 @@ export class TareaListComponent implements OnInit{
 
   ngOnInit() {
 
-
     this.listEstado = [
-      { name: 'New York', code: 'NY' },
-      { name: 'Rome', code: 'RM' },
-      { name: 'London', code: 'LDN' },
-      { name: 'Istanbul', code: 'IST' },
-      { name: 'Paris', code: 'PRS' }
+      { name: 'REGISTRADO', code: 'RG' },
+      { name: 'EN PROCESO', code: 'EP' },
+      { name: 'EJECUTADO', code: 'EJ' },
+      
   ];
-  this.listCategoria = [
-    { nameCat: 'Personal', codeCat: 'NY' },
-    { nameCat: 'Educativa', codeCat: 'RM' },
-    { nameCat: 'Laboral', codeCat: 'LDN' }
-];
+
+    this.listCategoria = [
+      { nameCat: 'PERSONAL', codeCat: 'PES' },
+      { nameCat: 'EDUCATIVA', codeCat: 'ED' },
+      { nameCat: 'LABORAL', codeCat: 'LAB' }
+  ];
 
 
     this.tareaService.getTareas().subscribe({
