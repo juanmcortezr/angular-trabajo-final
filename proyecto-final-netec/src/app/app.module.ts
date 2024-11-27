@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +15,10 @@ import { HomeComponent } from './shared/components/home/home.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { LogoutComponent } from './shared/components/logout/logout.component';
 import { environment } from './environment/environment';
+import { TareasModule } from './features/tareas/tareas.module';
+import { provideHttpClient } from '@angular/common/http';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -21,6 +26,7 @@ import { environment } from './environment/environment';
     HomeComponent,
     LoginComponent,
     LogoutComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -28,9 +34,12 @@ import { environment } from './environment/environment';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
+    TareasModule,
+    BrowserAnimationsModule,
+    ConfirmDialogModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(), provideHttpClient(),ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

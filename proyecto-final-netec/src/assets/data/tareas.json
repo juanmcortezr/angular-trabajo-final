@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "idTarea": "1",
+      "desTarea": "Prototipo sistema",
+      "encargado": "ymunozm",
+      "categoria": "Personal",
+      "fechaIni": "03/03/2024",
+      "fechaFin": "03/06/2024",
+      "estado": "Registrado"
+    },
+    {
+      "idTarea": "2",
+      "desTarea": "Login sistema",
+      "encargado": "rocha",
+      "categoria": "Laboral",
+      "fechaIni": "03/06/2024",
+      "fechaFin": "03/09/2024",
+      "estado": "Ejecutado"
+    }
+  ]
+}

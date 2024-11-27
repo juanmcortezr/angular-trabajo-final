@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TareaListComponent } from './features/tareas/tarea-list/tarea-list.component';
 
 import { HomeComponent } from './shared/components/home/home.component';
 
@@ -21,6 +22,20 @@ const routes: Routes = [
     path:'login',
     component:LoginComponent,
     pathMatch:'full'
+
+const routes: Routes = [
+
+  {
+    path:'tareaList',
+    component:TareaListComponent,
+  },
+  {
+    path:'agregarTarea',
+    component:TareaInsertComponent,
+  },
+  {
+    path:'editarTarea',
+    component:TareaUpdateComponent,
   }
 ];
 
