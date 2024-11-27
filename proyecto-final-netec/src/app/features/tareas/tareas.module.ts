@@ -13,6 +13,10 @@ import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 
+import { InputTextModule } from 'primeng/inputtext';
+import { CardModule } from 'primeng/card';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 @NgModule({
   declarations: [
     TareaHomeComponent,
@@ -29,8 +33,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ConfirmDialogModule,
     ToastModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,ToastModule,InputTextModule,CardModule,InputTextareaModule
   ],
-  exports:[TareaHomeComponent, TareaInsertComponent, TareaUpdateComponent, TareaDeleteComponent, TareaListComponent]
+  exports:[TareaHomeComponent, TareaInsertComponent, TareaUpdateComponent, TareaDeleteComponent, TareaListComponent, ButtonModule,InputTextModule,CardModule,InputTextareaModule,CalendarModule]
 })
 export class TareasModule { }
