@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path:'tareaList',
     component:TareaListComponent,
+  },
+  {
+    path:'agregarTarea',
+    component:TareaInsertComponent,
+  },
+  {
+    path:'editarTarea',
+    component:TareaUpdateComponent,
   }
 ];
 
