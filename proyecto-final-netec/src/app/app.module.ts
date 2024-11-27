@@ -16,7 +16,6 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { LogoutComponent } from './shared/components/logout/logout.component';
 import { environment } from './environment/environment';
 import { TareasModule } from './features/tareas/tareas.module';
-import { provideHttpClient } from '@angular/common/http';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
@@ -33,7 +32,7 @@ import { ConfirmationService } from 'primeng/api';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
     TareasModule,
     BrowserAnimationsModule,
     ConfirmDialogModule

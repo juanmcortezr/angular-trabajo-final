@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TareaListComponent } from './features/tareas/tarea-list/tarea-list.component';
 
+import { TareaInsertComponent } from './features/tareas/tarea-insert/tarea-insert.component';
+import { TareaUpdateComponent } from './features/tareas/tarea-update/tarea-update.component';
+
 import { HomeComponent } from './shared/components/home/home.component';
 
 import { Router } from '@angular/router';
@@ -15,15 +18,14 @@ const routes: Routes = [
   {
     path:'home',
     component:HomeComponent,
-    canActivate:[AuthGuard],
+    //canActivate:[AuthGuard],
     
   },
   {
     path:'login',
     component:LoginComponent,
     pathMatch:'full'
-
-const routes: Routes = [
+  }, 
 
   {
     path:'tareaList',
