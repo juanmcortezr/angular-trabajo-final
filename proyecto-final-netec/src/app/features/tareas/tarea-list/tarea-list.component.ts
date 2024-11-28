@@ -4,7 +4,9 @@ import { Tarea } from '../../../core/models/tarea';
 import { Router } from '@angular/router'; 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
-
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { TareaInsertComponent } from '../tarea-insert/tarea-insert.component';
+import { TareaUpdateComponent } from '../tarea-update/tarea-update.component';
 interface Estado {
   name: string;
   code: string;
@@ -18,17 +20,20 @@ interface Categoria {
   selector: 'app-tarea-list',
   templateUrl: './tarea-list.component.html',
   styleUrl: './tarea-list.component.css',
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService,DialogService]
 })
 export class TareaListComponent implements OnInit{
   
+  ref: DynamicDialogRef | undefined;
+
   listTareas: Tarea[] =[];
   errorMessage: string | null = null;
  
  
   constructor(private tareaService: TareaService, private router: Router, 
-              private confirmationService: ConfirmationService, private messageService: MessageService) {}
+              private confirmationService: ConfirmationService, private messageService: MessageService, public dialogService: DialogService) {}
 
+              
   listEstado: Estado[] | undefined;
   selectedEstado: Estado | undefined;
   listCategoria: Categoria[] | undefined;
@@ -63,9 +68,11 @@ export class TareaListComponent implements OnInit{
   }
 
   openEdit(){
-    
-     
+    this.ref = this.dialogService.open(TareaUpdateComponent, { header: ''});
+  }
 
+  openNuevo(){ 
+    this.ref = this.dialogService.open(TareaInsertComponent, { header: ''});
   }
   eliminar(event: Event){
     this.confirmationService.confirm({
