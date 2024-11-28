@@ -18,7 +18,7 @@ import { environment } from './environment/environment';
 import { TareasModule } from './features/tareas/tareas.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
-
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +35,8 @@ import { ConfirmationService } from 'primeng/api';
     //AngularFireAuthModule,
     TareasModule,
     BrowserAnimationsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DynamicDialogModule
   ],
   providers: [
     provideClientHydration(), provideHttpClient(),ConfirmationService
