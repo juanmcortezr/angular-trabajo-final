@@ -4,6 +4,7 @@ import { Tarea } from '../../../core/models/tarea';
 import { Router } from '@angular/router'; 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
+
 interface estadoTarea {
   nameEstado: string;
   codEstado: string;
@@ -30,10 +31,10 @@ export class TareaInsertComponent implements OnInit{
   constructor(private tareaService: TareaService, private router: Router, 
               private confirmationService: ConfirmationService, private messageService: MessageService) {}
 
-  
   listEstado: estadoTarea[] | undefined;
   listCategoria: categoriaTarea[] | undefined;
   
+
   ngOnInit() {
 
     this.listEstado = [
@@ -47,10 +48,7 @@ export class TareaInsertComponent implements OnInit{
       { nameCat: 'EDUCATIVA', codCat: 'EP' },
       { nameCat: 'LABORAL', codCat: 'EJ' },
     ];
-    
-    
-  }
 
-  
+  } 
 
 }
