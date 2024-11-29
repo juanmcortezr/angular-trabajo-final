@@ -1,10 +1,10 @@
 export class Tarea {
-    idTarea?: string | null;
+    key?: string | null;
     desTarea?: string;
     encargado?: string;
     categoria?: string;
-    fechaIni?: string;
-    fechaFin?: string;
+    fechaIni?: Date;
+    fechaFin?: Date;
     estado?: string;
 }
 

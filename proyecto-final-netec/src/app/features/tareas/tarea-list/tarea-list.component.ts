@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../../core/services/tarea.service';
 import { map } from 'rxjs/operators';
 import { Tarea, Estado, Categoria } from '../../../core/models/tarea';
-import { MessageService } from 'primeng/api';
-
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TareaInsertComponent } from '../tarea-insert/tarea-insert.component';
 import { TareaUpdateComponent } from '../tarea-update/tarea-update.component';
@@ -12,7 +11,7 @@ import { TareaUpdateComponent } from '../tarea-update/tarea-update.component';
   selector: 'app-tarea-list',
   templateUrl: './tarea-list.component.html',
   styleUrl: './tarea-list.component.css',
-  providers: [MessageService, DialogService]
+  providers: [ConfirmationService, MessageService, DialogService]
 })
 export class TareaListComponent implements OnInit {
 
@@ -21,8 +20,11 @@ export class TareaListComponent implements OnInit {
   listTareas: Tarea[] = [];
   errorMessage: string | null = null;
 
-  constructor(private tareaService: TareaService,
-    private messageService: MessageService, public dialogService: DialogService) { }
+  constructor(
+    private tareaService: TareaService, 
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService, 
+    public dialogService: DialogService) { }
 
   listEstado: Estado[] | undefined;
   listCategoria: Categoria[] | undefined;
@@ -83,26 +85,28 @@ export class TareaListComponent implements OnInit {
     });
   }
 
-  eliminar(event: Event) {
-    /*this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: '¿Estas seguro de Eliminar la Tarea?',
+  eliminar(key: string) {
+    console.log("eliminar ...", key);
+
+    this.confirmationService.confirm({
+      message: '¿Est\u00e1 seguro de Eliminar la tarea?',
       header: 'Eliminar Tarea',
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass: "p-button-danger p-button-text",
       rejectButtonStyleClass: "p-button-text p-button-text ",
-      acceptIcon: "none",
-      rejectIcon: "none",
-      acceptLabel: "Si",
+      acceptLabel: "S\u00ed",
       rejectLabel: "No",
-
       accept: () => {
-        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+        this.tareaService.delete(key).then(() => {
+          this.retrieveTareas();
+          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Tarea eliminada' });
+        }).catch(err => console.log(err));
+        
       },
       reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
       }
-    })*/
+    });
   }
   limpiarLista() { }
   btnBuscar() { }

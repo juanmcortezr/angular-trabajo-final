@@ -1,8 +1,6 @@
 <p-toast />
-<!--<p-confirmDialog ><p-confirmDialog />-->
+<p-confirmDialog />
 <p-panel header="GESTI&Oacute;N DE TAREAS">
-
-    
     <div class="formgrid grid">
         <!--<div class="field col-6">
             <label for="fechaIni" > Fecha Inicio: </label>
@@ -14,51 +12,57 @@
         </div>-->
         <div class="field col-6">
             <label for="estadoInput">Estado:</label>
-            <p-dropdown [options]="listEstado" optionLabel="name"
-                placeholder="Seleccione" ></p-dropdown>
+            <p-dropdown [options]="listEstado" optionLabel="name" placeholder="Seleccione"></p-dropdown>
         </div>
         <div class="field col-6">
             <label for="categoriaInput">Categoria:</label>
-            <p-dropdown [options]="listCategoria" optionLabel="nameCat"
-                placeholder="Seleccione" ></p-dropdown>
+            <p-dropdown [options]="listCategoria" optionLabel="nameCat" placeholder="Seleccione"></p-dropdown>
         </div>
-   
-    
-        <div class="col-2">
-            <p-button label="Buscar" icon="pi pi-search" (onClick)="btnBuscar()" iconPos="left" />
-        </div>
+        
     </div>
 
-    <div class="grid">
-        <div class="col-2">
+    <div class="flex justify-content-center mb-3">
+        <p-button label="Buscar" icon="pi pi-search" (onClick)="btnBuscar()" iconPos="left" />
+    </div>
+
+    <div class="formgrid grid">
+        <div class="field col-2">
             <p-button label="Agregar" (onClick)="openNuevo()" icon="pi pi-plus" iconPos="left" />
         </div>
     </div>
 
-    <p-table [value]="listTareas">
+    <p-table #dt [value]="listTareas" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['desTarea', 'categoria', 'estado']" [scrollable]="true" styleClass="p-datatable-gridlines small" 
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" sortMode="multiple">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Listado de Tareas</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input #textInput pInputText type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
+                        placeholder="Buscar..." />
+                </span>
+            </div>
+        </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th>IdTarea </th>
-                <th>desTarea</th>
-                <th>encargado</th>
-                <th>categoria</th>
-                <th>fechaIni</th>
-                <th>fechaFin</th>
-                <th>estado</th>
-                <th>accion</th>
+                <th >ID</th>
+                <th pSortableColumn="desTarea">Tarea <p-sortIcon field="desTarea" /></th>
+                <th pSortableColumn="categoria">Categor&iacute;a <p-sortIcon field="categoria" /></th>
+                <th pSortableColumn="fechaIni">Fecha Inicio <p-sortIcon field="fechaIni" /></th>
+                <th pSortableColumn="fechaFin">Fecha Fin <p-sortIcon field="fechaFin" /></th>
+                <th pSortableColumn="estado">Estado <p-sortIcon field="estado" /></th>
+                <th>Acci&oacute;n</th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-tarea let-columns="columns">
             <tr>
                 <td>
-                    {{tarea.idTarea}}
+                    {{tarea.key}}
                 </td>
                 <td>
                     {{tarea.desTarea }}
-                </td>
-                <td>
-                    {{tarea.encargado}}
                 </td>
                 <td>
                     {{tarea.categoria }}
@@ -74,7 +78,7 @@
                 </td>
                 <td>
                     <p-button label="" icon="pi pi-pencil" (onClick)="openEdit()" [rounded]="true" [text]="true" />
-                    <p-button label="" icon="pi pi-trash" (onClick)="eliminar($event)" [rounded]="true" [text]="true"
+                    <p-button label="" icon="pi pi-trash" (onClick)="eliminar(tarea.key)" [rounded]="true" [text]="true"
                         severity="danger" [outlined]="true" />
                 </td>
             </tr>

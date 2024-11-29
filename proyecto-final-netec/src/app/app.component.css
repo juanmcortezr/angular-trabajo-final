@@ -1,0 +1,9 @@
+:host ::ng-deep .p-panel .p-panel-header {
+    background-color: #4b6cb7;
+    color: white;
+}
+
+:host ::ng-deep .p-table .p-datatable .p-datatable-header {
+    background-color: #4b6cb7;
+    color: white;
+}
