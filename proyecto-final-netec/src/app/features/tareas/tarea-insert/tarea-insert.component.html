@@ -1,4 +1,4 @@
-<p-card header="Agregar Tarea"  [style]="{ width: '100%' }">
+<p-card header=""  [style]="{ width: '100%' }">
     <div class="formgrid grid">
         <div class="field col">
             <label for="firstname2">Fecha de Inicio :</label>
@@ -18,11 +18,9 @@
     <div class="formgrid grid">
         <div class="field col">
             <label for="firstname2">Estado :</label>
-            <select id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
-                <option>REGISTRADO</option>
-                <option>EN PROCESO</option>
-                <option>EJECUTADO</option>
-            </select>
+            <p-dropdown formControlName="selectedEstado" [options]="listEstado" optionLabel="nameEstado"
+            placeholder="Seleccione" />
+
         </div>
         <div class="field col">
             <label for="lastname2">Categoria :</label>
