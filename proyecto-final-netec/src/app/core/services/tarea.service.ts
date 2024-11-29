@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { Tarea } from '../models/tarea';
-import { map } from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TareaService {
+  private dbPath = '/tareas';
 
-  constructor(private http:HttpClient) { }
+  tareasRef: AngularFireList<Tarea>;
 
-  /*getProducts(): Observable<Tarea[]> {
-    return this.http.get<Tarea[]>(this.apiUrl).pipe(
-      catchError(this.handleError)
-    );
-  }*/
+  constructor(private db: AngularFireDatabase) {
+    this.tareasRef = db.list(this.dbPath);
+  }
 
-      
-  getTareas(): Observable<Tarea[]> {
-    return this.http.get<Tarea[]>('/assets/data/tareas.json').pipe(
-      map((response: any) => response.data)
-    );
+  getAll(): AngularFireList<Tarea> {
+    return this.tareasRef;
+  }
+
+  create(tarea: Tarea): any {
+    return this.tareasRef.push(tarea);
+  }
+
+  update(key: string, value: any): Promise<void> {
+    return this.tareasRef.update(key, value);
+  }
+
+  delete(key: string): Promise<void> {
+    return this.tareasRef.remove(key);
   }
         
 }

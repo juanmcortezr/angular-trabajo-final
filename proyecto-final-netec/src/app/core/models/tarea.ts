@@ -1,10 +1,19 @@
-export interface Tarea {
-    idTarea: String;
-    desTarea: String;
-    encargado: String;
-    categoria: String;
-    fechaIni: String;
-    fechaFin: String;
-    estado: string;
+export class Tarea {
+    idTarea?: string | null;
+    desTarea?: string;
+    encargado?: string;
+    categoria?: string;
+    fechaIni?: string;
+    fechaFin?: string;
+    estado?: string;
+}
 
+export interface Estado {
+    name: string;
+    code: string;
+}
+
+export interface Categoria {
+    nameCat: string;
+    codeCat: string;
 }

@@ -1,31 +1,58 @@
 import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../../core/services/tarea.service';
-import { Tarea } from '../../../core/models/tarea';
-import { Router } from '@angular/router'; 
-import { ConfirmationService, MessageService } from 'primeng/api';
-
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Estado, Categoria } from '../../../core/models/tarea';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-tarea-insert',
   templateUrl: './tarea-insert.component.html',
   styleUrl: './tarea-insert.component.css',
-  providers: [ConfirmationService, MessageService]
+  providers: [MessageService]
 
 })
-export class TareaInsertComponent implements OnInit{
+export class TareaInsertComponent implements OnInit {
 
-  listTareas: Tarea[] =[];
+  tareaForm!: FormGroup;
   errorMessage: string | null = null;
-  value = '';
- 
-  constructor(private tareaService: TareaService, private router: Router, 
-              private confirmationService: ConfirmationService, private messageService: MessageService) {}
+  listEstado: Estado[] | undefined;
+  listCategoria: Categoria[] | undefined;
 
-  ngOnInit() {
+  constructor(
+    private tareaService: TareaService, 
+    private ref: DynamicDialogRef,
+    private config: DynamicDialogConfig,
+  private formBuilder: FormBuilder) { }
 
-    
+  ngOnInit() { 
+    let dataParent = this.config.data;
+    console.log("dataParent ...", dataParent);
+
+    this.listEstado = dataParent.listEstado;
+    this.listCategoria = dataParent.listCategoria;
+
+    this.tareaForm = this.formBuilder.group({
+      fechaIni: '',
+      fechaFin: '',
+      desTarea: '',
+      estado: '',
+      categoria: ''
+    });
   }
 
-  
+  saveTarea(): void {
+    console.log("saveTarea ...", this.tareaForm.value);
+    this.tareaService.create(this.tareaForm.value).then(() => {
+      console.log('Created new item successfully!');
+      this.ref.close(true);
+    });
+  }
+
+  close(){
+    this.ref.close();
+  }
+
 
 }

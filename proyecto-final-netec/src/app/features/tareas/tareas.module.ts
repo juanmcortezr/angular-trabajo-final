@@ -12,10 +12,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-
 import { InputTextModule } from 'primeng/inputtext';
 import { CardModule } from 'primeng/card';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+
+import { ReactiveFormsModule } from '@angular/forms';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ConfirmDialogModule,
     ToastModule,
     CalendarModule,
-    DropdownModule,ToastModule,InputTextModule,CardModule,InputTextareaModule
+    DropdownModule,ToastModule,InputTextModule,CardModule,InputTextareaModule,
+    ReactiveFormsModule,
+    DynamicDialogModule
   ],
   exports:[TareaHomeComponent, TareaInsertComponent, TareaUpdateComponent, TareaDeleteComponent, TareaListComponent, ButtonModule,InputTextModule,CardModule,InputTextareaModule,CalendarModule]
 })

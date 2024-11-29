@@ -1,43 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../../core/services/tarea.service';
-import { Tarea } from '../../../core/models/tarea';
-import { Router } from '@angular/router'; 
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { map } from 'rxjs/operators';
+import { Tarea, Estado, Categoria } from '../../../core/models/tarea';
+import { MessageService } from 'primeng/api';
 
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TareaInsertComponent } from '../tarea-insert/tarea-insert.component';
 import { TareaUpdateComponent } from '../tarea-update/tarea-update.component';
-interface Estado {
-  name: string;
-  code: string;
-} 
-interface Categoria {
-  nameCat: string;
-  codeCat: string;
-} 
 
 @Component({
   selector: 'app-tarea-list',
   templateUrl: './tarea-list.component.html',
   styleUrl: './tarea-list.component.css',
-  providers: [ConfirmationService, MessageService,DialogService]
+  providers: [MessageService, DialogService]
 })
-export class TareaListComponent implements OnInit{
-  
+export class TareaListComponent implements OnInit {
+
   ref: DynamicDialogRef | undefined;
 
-  listTareas: Tarea[] =[];
+  listTareas: Tarea[] = [];
   errorMessage: string | null = null;
- 
- 
-  constructor(private tareaService: TareaService, private router: Router, 
-              private confirmationService: ConfirmationService, private messageService: MessageService, public dialogService: DialogService) {}
 
-              
+  constructor(private tareaService: TareaService,
+    private messageService: MessageService, public dialogService: DialogService) { }
+
   listEstado: Estado[] | undefined;
-  selectedEstado: Estado | undefined;
   listCategoria: Categoria[] | undefined;
-  selectedCategoria: Categoria | undefined;                 
+
+  selectedEstado: Estado | undefined;
+  selectedCategoria: Categoria | undefined;
 
   ngOnInit() {
 
@@ -45,60 +36,78 @@ export class TareaListComponent implements OnInit{
       { name: 'REGISTRADO', code: 'RG' },
       { name: 'EN PROCESO', code: 'EP' },
       { name: 'EJECUTADO', code: 'EJ' },
-      
-  ];
+
+    ];
 
     this.listCategoria = [
       { nameCat: 'PERSONAL', codeCat: 'PES' },
       { nameCat: 'EDUCATIVA', codeCat: 'ED' },
       { nameCat: 'LABORAL', codeCat: 'LAB' }
-  ];
+    ];
 
+    this.retrieveTareas();
 
-    this.tareaService.getTareas().subscribe({
-      next: (data) => {
-        console.log("tareas ...", data);
-        this.listTareas = data;
+  }
+
+  retrieveTareas(): void {
+    this.tareaService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe(data => {
+      this.listTareas = data;
+    });
+  }
+
+  openEdit() {
+    this.ref = this.dialogService.open(TareaUpdateComponent, { header: '' });
+  }
+
+  openNuevo() {
+    this.ref = this.dialogService.open(TareaInsertComponent, { 
+      data: {
+        listEstado: this.listEstado,
+        listCategoria: this.listCategoria
       },
-      error: (err) => {
-        this.errorMessage = 'No se pudieron cargar las tareas.';
-        console.error('Error al obtener tareas:', err);
+      header: '',
+      closable: false
+    });
+
+    this.ref.onClose.subscribe((refreshList: boolean) => {
+      console.log("close modal ...", refreshList);
+      if (refreshList){
+        this.retrieveTareas();
       }
     });
   }
 
-  openEdit(){
-    this.ref = this.dialogService.open(TareaUpdateComponent, { header: ''});
-  }
-
-  openNuevo(){ 
-    this.ref = this.dialogService.open(TareaInsertComponent, { header: ''});
-  }
-  eliminar(event: Event){
-    this.confirmationService.confirm({
+  eliminar(event: Event) {
+    /*this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: '¿Estas seguro de Eliminar la Tarea?',
       header: 'Eliminar Tarea',
       icon: 'pi pi-info-circle',
-      acceptButtonStyleClass:"p-button-danger p-button-text",
-      rejectButtonStyleClass:"p-button-text p-button-text ",
-      acceptIcon:"none",
-      rejectIcon:"none",
-      acceptLabel:"Si",
-      rejectLabel:"No",
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text ",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      acceptLabel: "Si",
+      rejectLabel: "No",
 
       accept: () => {
-          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
       },
       reject: () => {
-          this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
       }
-  });
+    })*/
   }
-  limpiarLista(){}
-  btnBuscar(){}
-  btnAgregar(){
-    
+  limpiarLista() { }
+  btnBuscar() { }
+  btnAgregar() {
+
   }
-  
+
 }

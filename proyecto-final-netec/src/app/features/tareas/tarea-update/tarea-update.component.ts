@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../../core/services/tarea.service';
 import { Tarea } from '../../../core/models/tarea';
 import { Router } from '@angular/router'; 
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
