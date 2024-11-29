@@ -24,11 +24,8 @@
         </div>
         <div class="field col">
             <label for="lastname2">Categoria :</label>
-            <select id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
-                <option>PERSONAL</option>
-                <option>EDUCATIVA</option>
-                <option>LABORAL</option>
-            </select>
+            <p-dropdown formControlName="selectedcategpria" [options]="listCategoria" optionLabel="nameCat"
+            placeholder="Seleccione" />
         </div>
     </div>
     <div class="formgrid grid">
