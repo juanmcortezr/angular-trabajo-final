@@ -21,11 +21,10 @@ interface categoriaTarea {
   styleUrl: './tarea-update.component.css'
 })
 export class TareaUpdateComponent implements OnInit{
-
   
   listEstado: estadoTarea[] | undefined;
   listCategoria: categoriaTarea[] | undefined;
-  
+
   ngOnInit() {
 
     this.listEstado = [
@@ -43,3 +42,4 @@ export class TareaUpdateComponent implements OnInit{
   } 
 
 }
+
