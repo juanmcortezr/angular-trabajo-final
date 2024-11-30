@@ -5,12 +5,13 @@ import { MessageService } from 'primeng/api';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Estado, Categoria } from '../../../core/models/tarea';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-tarea-insert',
   templateUrl: './tarea-insert.component.html',
   styleUrl: './tarea-insert.component.css',
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 
 })
 export class TareaInsertComponent implements OnInit {
@@ -21,12 +22,15 @@ export class TareaInsertComponent implements OnInit {
   listCategoria: Categoria[] | undefined;
 
   constructor(
-    private tareaService: TareaService, 
+    private tareaService: TareaService,
     private ref: DynamicDialogRef,
     private config: DynamicDialogConfig,
-  private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     let dataParent = this.config.data;
     console.log("dataParent ...", dataParent);
 
@@ -44,13 +48,26 @@ export class TareaInsertComponent implements OnInit {
 
   saveTarea(): void {
     console.log("saveTarea ...", this.tareaForm.value);
-    this.tareaService.create(this.tareaForm.value).then(() => {
-      console.log('Created new item successfully!');
-      this.ref.close(true);
+
+    this.confirmationService.confirm({
+      message: '¿Est\u00e1 seguro de registrar la tarea?',
+      header: 'Confirmaci\u00f3n',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text ",
+      acceptLabel: "S\u00ed",
+      rejectLabel: "No",
+      accept: () => {
+        this.tareaService.create(this.tareaForm.value).then(() => {
+          this.messageService.add({ severity: 'info', summary: 'Confirmaci\u00f3n', detail: 'Tarea registrada' });
+          this.ref.close(true);
+        });
+      },
+      reject: () => { }
     });
   }
 
-  close(){
+  close() {
     this.ref.close();
   }
 

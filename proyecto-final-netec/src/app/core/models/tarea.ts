@@ -3,8 +3,8 @@ export class Tarea {
     desTarea?: string;
     encargado?: string;
     categoria?: string;
-    fechaIni?: Date;
-    fechaFin?: Date;
+    fechaIni?: string;
+    fechaFin?: string;
     estado?: string;
 }
 

@@ -21,9 +21,9 @@ export class TareaListComponent implements OnInit {
   errorMessage: string | null = null;
 
   constructor(
-    private tareaService: TareaService, 
+    private tareaService: TareaService,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService, 
+    private messageService: MessageService,
     public dialogService: DialogService) { }
 
   listEstado: Estado[] | undefined;
@@ -63,23 +63,44 @@ export class TareaListComponent implements OnInit {
     });
   }
 
-  openEdit() {
-    this.ref = this.dialogService.open(TareaUpdateComponent, { header: '' });
-  }
-
-  openNuevo() {
-    this.ref = this.dialogService.open(TareaInsertComponent, { 
+  openEdit(tarea: Tarea) {
+    this.ref = this.dialogService.open(TareaUpdateComponent, {
       data: {
+        tareaSeleccionada: tarea,
         listEstado: this.listEstado,
         listCategoria: this.listCategoria
       },
-      header: '',
-      closable: false
+      header: 'EDITAR TAREA',
+      width: '50%',
+      height: '65%',
+      closable: false,
+      styleClass: "custom-header-dialog"
     });
 
     this.ref.onClose.subscribe((refreshList: boolean) => {
       console.log("close modal ...", refreshList);
-      if (refreshList){
+      if (refreshList) {
+        this.retrieveTareas();
+      }
+    });
+  }
+
+  openNuevo() {
+    this.ref = this.dialogService.open(TareaInsertComponent, {
+      data: {
+        listEstado: this.listEstado,
+        listCategoria: this.listCategoria
+      },
+      header: 'REGISTRO DE TAREAS',
+      width: '50%',
+      height: '65%',
+      closable: false,
+      styleClass: "custom-header-dialog"
+    });
+
+    this.ref.onClose.subscribe((refreshList: boolean) => {
+      console.log("close modal ...", refreshList);
+      if (refreshList) {
         this.retrieveTareas();
       }
     });
@@ -89,8 +110,8 @@ export class TareaListComponent implements OnInit {
     console.log("eliminar ...", key);
 
     this.confirmationService.confirm({
-      message: '¿Est\u00e1 seguro de Eliminar la tarea?',
-      header: 'Eliminar Tarea',
+      message: '¿Est\u00e1 seguro de eliminar la tarea?',
+      header: 'Confirmaci\u00f3n',
       icon: 'pi pi-info-circle',
       acceptButtonStyleClass: "p-button-danger p-button-text",
       rejectButtonStyleClass: "p-button-text p-button-text ",
@@ -101,17 +122,30 @@ export class TareaListComponent implements OnInit {
           this.retrieveTareas();
           this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Tarea eliminada' });
         }).catch(err => console.log(err));
-        
       },
-      reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
-      }
+      reject: () => { }
     });
   }
-  limpiarLista() { }
-  btnBuscar() { }
-  btnAgregar() {
 
+  getDescripcionEstado(code: string) {
+    let description = "-";
+    if (code) {
+      let found = this.listEstado?.find(item => item.code === code);
+      if (found){
+        description = found.name;
+      }
+    }
+    return description;
   }
 
+  getDescripcionCategoria(code: string) {
+    let description = "-";
+    if (code) {
+      let found = this.listCategoria?.find(item => item.codeCat === code);
+      if (found){
+        description = found.nameCat;
+      }
+    }
+    return description;
+  }
 }

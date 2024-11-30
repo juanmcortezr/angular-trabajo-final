@@ -1,38 +1,47 @@
-<p-card header="Agregar Tarea">
-    <form [formGroup]="tareaForm">
-        <div class="formgrid grid">
-            <div class="field col-6">
-                <label for="fechaIni">Fecha de Inicio:</label>
-                <p-calendar formControlName="fechaIni" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"
-                    inputId="buttondisplay" />
+<p-toast />
+<p-confirmDialog styleClass="custom-header-dialog" [closable]="false" />
+<div class="flex flex-wrap align-items-center justify-content-center">
+    <div class="py-3">
+        <form [formGroup]="tareaForm">
+            <div class="formgrid grid">
+                <div class="field col-6">
+                    <label for="fechaIni">Fecha de Inicio:</label>
+                    <p-calendar formControlName="fechaIni" dateFormat="dd/mm/yy" dataType="string" [showIcon]="true"
+                        [showOnFocus]="false" inputId="buttondisplay" />
+                </div>
+                <div class="field col-6">
+                    <label for="fechaFin">Fecha Fin:</label>
+                    <p-calendar formControlName="fechaFin" dateFormat="dd/mm/yy" dataType="string" [showIcon]="true"
+                        [showOnFocus]="false" inputId="buttondisplay" />
+                </div>
+                <div class="field col-12">
+                    <label for="desTarea">Descripci&oacute;n de la Tarea:</label>
+                    <input type="text" pInputText formControlName="desTarea"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                </div>
+                <div class="field col">
+                    <label for="estado">Estado: </label>
+                    <div class="col-6 ">
+                        <p-dropdown formControlName="estado" [options]="listEstado" optionValue="code"
+                            optionLabel="name" placeholder="Seleccione"></p-dropdown>
+                    </div>
+                </div>
+                <div class="field col">
+                    <label for="categoria">Categor&iacute;a:</label>
+                    <div class="col-6 ">
+                        <p-dropdown formControlName="categoria" [options]="listCategoria" optionValue="codeCat"
+                            optionLabel="nameCat" placeholder="Seleccione"></p-dropdown>
+                    </div>
+                </div>
             </div>
-            <div class="field col-6">
-                <label for="fechaFin">Fecha Fin:</label>
-                <p-calendar formControlName="fechaFin" dateFormat="dd.mm.yy" [showIcon]="true" [showOnFocus]="false"
-                    inputId="buttondisplay" />
+        </form>
+        <div class="grid">
+            <div class="col-6">
+                <p-button label="Grabar" icon="pi pi-plus" (onClick)="saveTarea()" />
             </div>
-            <div class="field col-12">
-                <label for="desTarea">Descripci&oacute;n de la Tarea:</label>
-                <textarea formControlName="desTarea" rows="5" pInputTextarea [autoResize]="true"></textarea>
+            <div class="col-6">
+                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()" />
             </div>
-            <div class="field col-6">
-                <label for="estado">Estado:</label>
-                <p-dropdown formControlName="estado" [options]="listEstado" optionValue="code" optionLabel="name"
-                    placeholder="Seleccione"></p-dropdown>
-            </div>
-            <div class="field col-6">
-                <label for="categoria">Categor&iacute;a:</label>
-                <p-dropdown formControlName="categoria" [options]="listCategoria" optionValue="codeCat"
-                    optionLabel="nameCat" placeholder="Seleccione"></p-dropdown>
-            </div>
-        </div>
-    </form>
-    <div class="formgrid grid">
-        <div class="field col">
-            <p-button label="Agregar" icon="pi pi-plus" (onClick)="saveTarea()" />
-        </div>
-        <div class="field col">
-            <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()" />
         </div>
     </div>
-</p-card>
+</div>
