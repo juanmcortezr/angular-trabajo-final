@@ -35,12 +35,10 @@
                 </div>
             </div>
         </form>
-        <div class="grid">
-            <div class="col-6">
-                <p-button label="Grabar" icon="pi pi-plus" (onClick)="saveTarea()" />
-            </div>
-            <div class="col-6">
-                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()" />
+        <div class="footer">
+            <div class="center-content">
+                <p-button label="Grabar" icon="pi pi-save" (onClick)="saveTarea()" size="small"/>
+                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()" size="small"/>
             </div>
         </div>
     </div>

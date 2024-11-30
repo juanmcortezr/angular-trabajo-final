@@ -7,12 +7,12 @@
                 <div class="field col-6">
                     <label for="fechaIni">Fecha de Inicio:</label>
                     <p-calendar formControlName="fechaIni" dateFormat="dd/mm/yy" dataType="string" [showIcon]="true"
-                        [showOnFocus]="false" inputId="buttondisplay" />
+                            [showOnFocus]="false" inputId="buttondisplay" />
                 </div>
                 <div class="field col-6">
                     <label for="fechaFin">Fecha Fin:</label>
                     <p-calendar formControlName="fechaFin" dateFormat="dd/mm/yy" dataType="string" [showIcon]="true"
-                        [showOnFocus]="false" inputId="buttondisplay" />
+                            [showOnFocus]="false" inputId="buttondisplay" />
                 </div>
                 <div class="field col-12">
                     <label for="desTarea">Descripci&oacute;n de la Tarea:</label>
@@ -35,12 +35,10 @@
                 </div>
             </div>
         </form>
-        <div class="grid">
-            <div class="col-6">
-                <p-button label="Grabar" icon="pi pi-plus" (onClick)="saveTarea()" />
-            </div>
-            <div class="col-6">
-                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()" />
+        <div class="footer">
+            <div class="center-content">
+                <p-button label="Grabar" icon="pi pi-save" (onClick)="saveTarea()" size="small"/>
+                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()"  size="small"/>
             </div>
         </div>
     </div>

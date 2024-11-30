@@ -71,8 +71,8 @@ export class TareaListComponent implements OnInit {
         listCategoria: this.listCategoria
       },
       header: 'EDITAR TAREA',
-      width: '50%',
-      height: '65%',
+      width: '40%',
+      height: '75%',
       closable: false,
       styleClass: "custom-header-dialog"
     });
@@ -92,8 +92,8 @@ export class TareaListComponent implements OnInit {
         listCategoria: this.listCategoria
       },
       header: 'REGISTRO DE TAREAS',
-      width: '50%',
-      height: '65%',
+      width: '45%',
+      height: '70%',
       closable: false,
       styleClass: "custom-header-dialog"
     });
