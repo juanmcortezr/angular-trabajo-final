@@ -1,0 +1,21 @@
+:host ::ng-deep .p-panel .p-panel-header {
+    background: #0063AE !important;
+    color: white !important;
+}
+
+:host ::ng-deep .p-card .p-card-header {
+    padding: 0.5em;
+    height: 40px;
+    background: #0063AE !important;
+    color: white !important;
+}
+
+::ng-deep .custom-header-dialog .p-dialog-header {
+    background: #0063AE !important;
+    color: white !important;
+}
+
+:host ::ng-deep .p-datatable-header {
+    background: #0063AE !important;
+    color: white !important;
+}

@@ -1,80 +1,60 @@
 <p-toast />
-<p-confirmDialog />
+<p-confirmDialog styleClass="custom-header-dialog" [closable]="false"/>
 <p-panel header="GESTI&Oacute;N DE TAREAS">
-<fieldset class="bnf-fieldset">
-    <legend>Criterios de B&uacute;squeda</legend>
-    <div class="formgrid grid">
-        <div class="field col-6">
-            <label for="fechaIni" > Fecha Inicio: </label>
-            <p-calendar formControlName="fechaIni" [showIcon]="true" [showOnFocus]="false" inputId="fechaIni" />
-        </div>
-        <div class="field col-6">
-            <label for="fechaFin" > Fecha Fin: </label>
-            <p-calendar formControlName="fechaFin" [showIcon]="true" [showOnFocus]="false" inputId="fechaFin" valu/>
-        </div>
-        <div class="field col-6">
-            <label for="estadoInput">Estado:</label>
-            <p-dropdown formControlName="selectedEstado" [options]="listEstado" optionLabel="name"
-                placeholder="Seleccione" />
-        </div>
-        <div class="field col-6">
-            <label for="categoriaInput">Categoria:</label>
-            <p-dropdown formControlName="selectedCategoria" [options]="listCategoria" optionLabel="nameCat"
-                placeholder="Seleccione" />
+    <div class="flex flex-wrap align-items-center justify-content-center">
+        <div class="py-3">
+            <p-button label="Agregar" (onClick)="openNuevo()" icon="pi pi-plus" iconPos="left" size="small" />
         </div>
     </div>
-    <div class="grid">
-        <div class="col-2">
-            <p-button label="Buscar" icon="pi pi-search" (onClick)="btnBuscar()" iconPos="left" />
-        </div>
-    </div>
-</fieldset>
-    <div class="grid">
-        <div class="col-2">
-            <p-button label="Agregar" (onClick)="btnAgregar()" icon="pi pi-plus" iconPos="left" />
-        </div>
-    </div>
-
-    <p-table [value]="listTareas">
+    <p-table #dt [value]="listTareas" [rows]="10" [paginator]="true"
+        [globalFilterFields]="['key','desTarea', 'categoria', 'fechaIni','fechaFin','estado']" [scrollable]="true"
+        currentPageReportTemplate="Mostrando {first} al {last} del {totalRecords} registros"
+        [showCurrentPageReport]="true" sortMode="multiple" size="small">
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <h5 class="m-0">LISTADO DE TAREAS</h5>
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input #textInput pInputText type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
+                        placeholder="Buscar..." class="p-inputtext-sm"/>
+                </span>
+            </div>
+        </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th>IdTarea </th>
-                <th>desTarea</th>
-                <th>encargado</th>
-                <th>categoria</th>
-                <th>fechaIni</th>
-                <th>fechaFin</th>
-                <th>estado</th>
-                <th>accion</th>
+                <th pSortableColumn="key">ID <p-sortIcon field="key" /><p-columnFilter type="text" field="key" display="menu" /></th>
+                <th pSortableColumn="desTarea">Tarea <p-sortIcon field="desTarea" /><p-columnFilter type="text" field="desTarea" display="menu" /></th>
+                <th pSortableColumn="categoria">Categor&iacute;a 
+                    <p-sortIcon field="categoria" />
+                    <p-columnFilter type="text" field="categoria" display="menu" />
+                </th>
+                <th pSortableColumn="fechaIni">Fecha Inicio 
+                    <p-sortIcon field="fechaIni" />
+                    <p-columnFilter type="text" field="fechaIni" display="menu" />
+                </th>
+                <th pSortableColumn="fechaFin">Fecha Fin 
+                    <p-sortIcon field="fechaFin" />
+                    <p-columnFilter type="text" field="fechaFin" display="menu" />
+                </th>
+                <th pSortableColumn="estado">Estado 
+                    <p-sortIcon field="estado" />
+                    <p-columnFilter type="text" field="estado" display="menu" />
+                </th>
+                <th>Acci&oacute;n</th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-tarea let-columns="columns">
             <tr>
+                <td>{{tarea.key}}</td>
+                <td>{{tarea.desTarea }}</td>
+                <td>{{getDescripcionCategoria(tarea.categoria) }}</td>
+                <td>{{tarea.fechaIni}}</td>
+                <td>{{tarea.fechaFin}}</td>
+                <td>{{getDescripcionEstado(tarea.estado)}}</td>
                 <td>
-                    {{tarea.idTarea}}
-                </td>
-                <td>
-                    {{tarea.desTarea }}
-                </td>
-                <td>
-                    {{tarea.encargado}}
-                </td>
-                <td>
-                    {{tarea.categoria }}
-                </td>
-                <td>
-                    {{tarea.fechaIni}}
-                </td>
-                <td>
-                    {{tarea.fechaFin}}
-                </td>
-                <td>
-                    {{tarea.estado}}
-                </td>
-                <td>
-                    <p-button label="" icon="pi pi-pencil" (onClick)="openEdit()" [rounded]="true" [text]="true" />
-                    <p-button label="" icon="pi pi-trash" (onClick)="eliminar($event)" [rounded]="true" [text]="true"
+                    <p-button label="" icon="pi pi-pencil" (onClick)="openEdit(tarea)" [rounded]="true" [text]="true" />
+                    <p-button label="" icon="pi pi-trash" (onClick)="eliminar(tarea.key)" [rounded]="true" [text]="true"
                         severity="danger" [outlined]="true" />
                 </td>
             </tr>

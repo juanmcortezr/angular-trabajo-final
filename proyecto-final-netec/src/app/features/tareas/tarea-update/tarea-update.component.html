@@ -1,57 +1,45 @@
-<p-card header="Editar Tarea"  [style]="{ width: '100%' }">
-    
-
-    <div class="formgrid grid">
-        <div class="field col">
-            <label for="firstname2">Código de Tarea :</label>
-            <label for="firstname2"><b>T001</b></label>
-        </div>
-        <div class="field col">
-            <label for="lastname2">Responsable :</label>
-            <label for="lastname2"><span class="fadein animation-duration-1000 animation-iteration-infinite flex 
-                font-bold  border-round">Cortez Rochabrun Juan Mario</span></label>
-        </div>
-    </div>
-        <div class="formgrid grid">
-        <div class="field col">
-            <label for="firstname2">Fecha de Inicio :</label>
-            <p-calendar  [showIcon]="true"  [showOnFocus]="false" inputId="buttondisplay" />
-        </div>
-        <div class="field col">
-            <label for="lastname2">Fecha  Fin :</label>
-            <p-calendar  [showIcon]="true"  [showOnFocus]="false" inputId="buttondisplay" />
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col">
-            <label for="firstname2">Descripción de la Tarea</label>
-            <textarea rows="5" cols="30" pInputTextarea  formControlName="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"></textarea>
-        </div>
-    </div>
-    <div class="formgrid grid">
-        <div class="field col">
-            <label for="firstname2">Estado :</label>
-            <select id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
-                <option>REGISTRADO</option>
-                <option>EN PROCESO</option>
-                <option>EJECUTADO</option>
-            </select>
-        </div>
-        <div class="field col">
-            <label for="lastname2">Categoria :</label>
-            <select id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
-                <option>PERSONAL</option>
-                <option>EDUCATIVA</option>
-                <option>LABORAL</option>
-            </select>
+<p-toast />
+<p-confirmDialog styleClass="custom-header-dialog" [closable]="false" />
+<div class="flex flex-wrap align-items-center justify-content-center">
+    <div class="py-3">
+        <form [formGroup]="tareaForm">
+            <div class="formgrid grid">
+                <div class="field col-6">
+                    <label for="fechaIni">Fecha de Inicio:</label>
+                    <p-calendar formControlName="fechaIni" dateFormat="dd/mm/yy" dataType="string" [showIcon]="true"
+                            [showOnFocus]="false" inputId="buttondisplay" />
+                </div>
+                <div class="field col-6">
+                    <label for="fechaFin">Fecha Fin:</label>
+                    <p-calendar formControlName="fechaFin" dateFormat="dd/mm/yy" dataType="string" [showIcon]="true"
+                            [showOnFocus]="false" inputId="buttondisplay" />
+                </div>
+                <div class="field col-12">
+                    <label for="desTarea">Descripci&oacute;n de la Tarea:</label>
+                    <input type="text" pInputText formControlName="desTarea"
+                        class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                </div>
+                <div class="field col">
+                    <label for="estado">Estado: </label>
+                    <div class="col-6 ">
+                        <p-dropdown formControlName="estado" [options]="listEstado" optionValue="code"
+                            optionLabel="name" placeholder="Seleccione"></p-dropdown>
+                    </div>
+                </div>
+                <div class="field col">
+                    <label for="categoria">Categor&iacute;a:</label>
+                    <div class="col-6 ">
+                        <p-dropdown formControlName="categoria" [options]="listCategoria" optionValue="codeCat"
+                            optionLabel="nameCat" placeholder="Seleccione"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="footer">
+            <div class="center-content">
+                <p-button label="Grabar" icon="pi pi-save" (onClick)="saveTarea()" size="small"/>
+                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()"  size="small"/>
+            </div>
         </div>
     </div>
-    <div class="formgrid grid">
-        <div class="field col">
-            <p-button label="Actualizar" />
-        </div>
-        <div class="field col">
-            <p-button label="Cancelar" severity="secondary" />
-        </div>
-    </div>
-</p-card>
+</div>

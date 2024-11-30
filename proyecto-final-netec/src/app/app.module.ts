@@ -9,6 +9,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule} from '@angular/fire/compat';
 import { provideHttpClient } from '@angular/common/http';
 
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './shared/components/home/home.component';
@@ -33,9 +35,13 @@ import { ConfirmationService } from 'primeng/api';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
     TareasModule,
     BrowserAnimationsModule,
-    ConfirmDialogModule
+    ReactiveFormsModule,
+	  ConfirmDialogModule
   ],
   providers: [
     provideClientHydration(), provideHttpClient(),ConfirmationService

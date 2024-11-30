@@ -26,24 +26,15 @@
             "outputPath": "dist/proyecto-final-netec",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+            "assets": ["src/assets"],
             "styles": [
-
               "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-              "src/styles.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
               "node_modules/primeflex/primeflex.css",
-              "https://unpkg.com/primeflex@latest/primeflex.css"
+              "src/styles.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -108,6 +99,8 @@
             "styles": [
               "src/styles.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
               "node_modules/primeflex/primeflex.css",
               "https://unpkg.com/primeflex@latest/primeflex.css"
             ],
