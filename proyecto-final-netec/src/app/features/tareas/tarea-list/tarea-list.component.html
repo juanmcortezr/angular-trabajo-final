@@ -3,7 +3,7 @@
 <p-panel header="GESTI&Oacute;N DE TAREAS">
     <div class="flex flex-wrap align-items-center justify-content-center">
         <div class="py-3">
-            <p-button label="Agregar" (onClick)="openNuevo()" icon="pi pi-plus" iconPos="left" size="small" />
+            <p-button label="Agregar" [rounded]="true" (onClick)="openNuevo()" icon="pi pi-plus" iconPos="left" size="small" />
         </div>
     </div>
     <p-table #dt [value]="listTareas" [rows]="10" [paginator]="true"
