@@ -36,7 +36,12 @@
       </div>
 
       <p></p>
-      <div class="field grid" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <!-- p>{{ errorMessage | textoColor }}</p -->
+
+      <div class="field grid" *ngIf="errorMessage" [ngStyle]="{ 'color': errorMessage | textoColor }">
+      {{ errorMessage }}
+      </div>
 
     </form>
   </div>

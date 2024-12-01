@@ -30,14 +30,17 @@ const routes: Routes = [
   {
     path:'tareaList',
     component:TareaListComponent,
+    //canActivate:[AuthGuard],
   },
   {
     path:'agregarTarea',
     component:TareaInsertComponent,
+    //canActivate:[AuthGuard],
   },
   {
     path:'editarTarea',
     component:TareaUpdateComponent,
+    //canActivate:[AuthGuard],
   }
 ];
 

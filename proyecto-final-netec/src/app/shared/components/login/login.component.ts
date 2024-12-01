@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from  '@angular/router';
 
-
+import { TextoColorPipe } from '../../../core/pipes/TextoColorPipe';
  
 @Component({
   selector: 'app-login',

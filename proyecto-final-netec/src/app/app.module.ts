@@ -21,12 +21,15 @@ import { TareasModule } from './features/tareas/tareas.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
+import { TextoColorPipe } from './core/pipes/TextoColorPipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    TextoColorPipe
     
   ],
   imports: [
