@@ -35,11 +35,9 @@
                 </div>
             </div>
         </form>
-        <div class="footer">
-            <div class="center-content">
-                <p-button label="Grabar" icon="pi pi-save" (onClick)="saveTarea()" size="small"/>
-                <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()"  size="small"/>
-            </div>
+        <div class="card flex justify-content-center gap-3">
+            <p-button class="flex align-items-center" [rounded]="true" label="Grabar" icon="pi pi-save" (onClick)="saveTarea()" size="small"/>
+            <p-button class="flex align-items-center" [rounded]="true" label="Cancelar" icon="pi pi-times" severity="secondary" (onClick)="close()"  size="small"/>
         </div>
     </div>
 </div>
