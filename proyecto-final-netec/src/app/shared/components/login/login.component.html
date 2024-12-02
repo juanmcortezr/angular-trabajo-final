@@ -8,8 +8,8 @@
   <div class="col-4">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       
-      <div class="field grid">
-        <label for="email" style="width:100px">Correo Electrónico</label>
+      <div class="field grid col-4">
+        <label for="email" >Correo Electrónico</label>
         <div>
           <input id="email" formControlName="email" />
           <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
@@ -20,7 +20,7 @@
 
       <p></p>
 
-      <div class="field grid">
+      <div class="field grid col-4">
         <label for="password" style="width:100px">Contraseña</label>
         <div>
           <input type="password" id="password" formControlName="password" />
@@ -36,8 +36,6 @@
       </div>
 
       <p></p>
-
-      <!-- p>{{ errorMessage | textoColor }}</p -->
 
       <div class="field grid" *ngIf="errorMessage" [ngStyle]="{ 'color': errorMessage | textoColor }">
       {{ errorMessage }}

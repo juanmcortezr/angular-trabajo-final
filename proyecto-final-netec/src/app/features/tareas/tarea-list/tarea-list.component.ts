@@ -7,6 +7,9 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TareaInsertComponent } from '../tarea-insert/tarea-insert.component';
 import { TareaUpdateComponent } from '../tarea-update/tarea-update.component';
 
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from  '@angular/router';
+
 @Component({
   selector: 'app-tarea-list',
   templateUrl: './tarea-list.component.html',
@@ -24,7 +27,10 @@ export class TareaListComponent implements OnInit {
     private tareaService: TareaService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    public dialogService: DialogService) { }
+    public dialogService: DialogService,
+    private authService: AuthService, 
+    private router: Router
+  ) { }
 
   listEstado: Estado[] | undefined;
   listCategoria: Categoria[] | undefined;
@@ -50,6 +56,14 @@ export class TareaListComponent implements OnInit {
     this.retrieveTareas();
 
   }
+
+
+  async onLogout() {
+    await this.authService.logout();
+    localStorage.removeItem('token'); // Elimina el token almacenado
+    this.router.navigate(['/login']); // Redirige al usuario a la página de login
+  }
+
 
   retrieveTareas(): void {
     this.tareaService.getAll().snapshotChanges().pipe(

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { AuthGuard } from './core/guardians/auth.guard';
 
 import { LoginComponent } from './shared/components/login/login.component';
+//import { LogoutComponent } from './shared/components/logout/logout.component';
 
 const routes: Routes = [
 
@@ -30,17 +31,17 @@ const routes: Routes = [
   {
     path:'tareaList',
     component:TareaListComponent,
-    //canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
   },
   {
     path:'agregarTarea',
     component:TareaInsertComponent,
-    //canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
   },
   {
     path:'editarTarea',
     component:TareaUpdateComponent,
-    //canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
   }
 ];
 
