@@ -12,7 +12,7 @@
         </div>
     </div>
     <p-table #dt [value]="listTareas" [rows]="10" [paginator]="true"
-        [globalFilterFields]="['key','desTarea', 'categoria', 'fechaIni','fechaFin','estado']" [scrollable]="true"
+        [globalFilterFields]="['key','desTarea', 'desCategoria', 'fechaIni','fechaFin','desEstado']" [scrollable]="true"
         currentPageReportTemplate="Mostrando {first} al {last} del {totalRecords} registros"
         [showCurrentPageReport]="true" sortMode="multiple" size="small">
         <ng-template pTemplate="caption">
@@ -27,12 +27,14 @@
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
-                <th pSortableColumn="key">ID <p-sortIcon field="key" /><p-columnFilter type="text" field="key" display="menu" /></th>
-                <th pSortableColumn="desTarea">Tarea <p-sortIcon field="desTarea" /><p-columnFilter type="text" field="desTarea" display="menu" /></th>
-                <th pSortableColumn="categoria">Categor&iacute;a 
-                    <p-sortIcon field="categoria" />
-                    <p-columnFilter type="text" field="categoria" display="menu" />
+                <th pSortableColumn="key">ID <p-sortIcon field="key" />
+                    <p-columnFilter type="text" field="key" display="menu" />
                 </th>
+                <th pSortableColumn="desTarea">Tarea <p-sortIcon field="desTarea" />
+                    <p-columnFilter type="text" field="desTarea" display="menu" />
+                </th>
+                <th pSortableColumn="categoria">Categor&iacute;a <p-sortIcon field="desCategoria" />
+                    <p-columnFilter type="text" field="desCategoria" display="menu" /></th>
                 <th pSortableColumn="fechaIni">Fecha Inicio 
                     <p-sortIcon field="fechaIni" />
                     <p-columnFilter type="text" field="fechaIni" display="menu" />
@@ -41,9 +43,8 @@
                     <p-sortIcon field="fechaFin" />
                     <p-columnFilter type="text" field="fechaFin" display="menu" />
                 </th>
-                <th pSortableColumn="estado">Estado 
-                    <p-sortIcon field="estado" />
-                    <p-columnFilter type="text" field="estado" display="menu" />
+                <th pSortableColumn="estado">Estado <p-sortIcon field="desEstado" />
+                    <p-columnFilter type="text" field="desEstado" display="menu" />
                 </th>
                 <th>Acci&oacute;n</th>
             </tr>
@@ -53,7 +54,7 @@
             <tr>
                 <td>{{tarea.key}}</td>
                 <td>{{tarea.desTarea }}</td>
-                <td>{{getDescripcionCategoria(tarea.categoria) }}</td>
+                <td>{{tarea.desCategoria }}</td>
                 <td>{{tarea.fechaIni}}</td>
                 <td>{{tarea.fechaFin}}</td>
                 <td>{{getDescripcionEstado(tarea.estado)}}</td>

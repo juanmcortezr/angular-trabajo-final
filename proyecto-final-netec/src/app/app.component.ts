@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
         "dateIsNot": "La fecha no es",
         "dateBefore": "La fecha es anterior",
         "dateAfter": "La fecha es después",
-        "clear": "Claro",
+        "clear": "Limpiar",
         "apply": "Aplicar",
         "matchAll": "Coincidir con todo",
         "matchAny": "coincidir con cualquiera",

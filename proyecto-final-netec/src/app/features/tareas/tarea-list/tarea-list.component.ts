@@ -69,7 +69,9 @@ export class TareaListComponent implements OnInit {
     this.tareaService.getAll().snapshotChanges().pipe(
       map(changes =>
         changes.map(c =>
-          ({ key: c.payload.key, ...c.payload.val() })
+          ({ key: c.payload.key, 
+            desCategoria: this.getDescripcionCategoria(c.payload.val()?.categoria),
+            desEstado: this.getDescripcionEstado(c.payload.val()?.estado), ...c.payload.val() })
         )
       )
     ).subscribe(data => {
@@ -141,7 +143,7 @@ export class TareaListComponent implements OnInit {
     });
   }
 
-  getDescripcionEstado(code: string) {
+  getDescripcionEstado(code?: string) {
     let description = "-";
     if (code) {
       let found = this.listEstado?.find(item => item.code === code);
@@ -152,7 +154,7 @@ export class TareaListComponent implements OnInit {
     return description;
   }
 
-  getDescripcionCategoria(code: string) {
+  getDescripcionCategoria(code?: string) {
     let description = "-";
     if (code) {
       let found = this.listCategoria?.find(item => item.codeCat === code);
