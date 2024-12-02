@@ -136,7 +136,7 @@ export class TareaListComponent implements OnInit {
       accept: () => {
         this.tareaService.delete(key).then(() => {
           this.retrieveTareas();
-          this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Tarea eliminada' });
+          this.messageService.add({ severity: 'info', summary: 'Confirmaci\u00f3n', detail: 'Tarea eliminada' });
         }).catch(err => console.log(err));
       },
       reject: () => { }

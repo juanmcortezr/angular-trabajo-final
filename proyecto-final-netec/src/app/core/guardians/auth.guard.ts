@@ -12,13 +12,13 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-      console.log("valor de localStorage: " + localStorage);
+      //console.log("valor de localStorage: " + localStorage);
       let isAuthenticated : any = true;
-      if (localStorage == null) {
-        isAuthenticated = false;
-      }
-      else {
+      if (typeof window !== 'undefined' && window.localStorage) {
         isAuthenticated = localStorage.getItem('token');//false; // Lógica de autenticación
+        
+      } else {
+        isAuthenticated = false;
       }
  
     if (!isAuthenticated) {
